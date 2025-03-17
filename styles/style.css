@@ -1,0 +1,10 @@
+header {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+header > p {
+    margin-top: auto;
+    margin-bottom: auto;
+}
