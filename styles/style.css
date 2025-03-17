@@ -2,6 +2,11 @@ body {
     margin: 0;
 }
 
+h2 {
+    font-size: 2em;
+}
+
+
 header {
     display: flex;
     flex-direction: row;
@@ -22,3 +27,15 @@ p{
 
 header > div:nth-child(1){flex-grow: 1;}
 header > div:nth-child(2){flex-grow: 5;}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+main > div > h2 {
+    text-align: center;
+
+}
+
