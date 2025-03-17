@@ -2,9 +2,17 @@ header {
     display: flex;
     flex-direction: row;
     text-align: center;
+    justify-content: left;
 }
 
-header > p {
+header > div {
+    display: flex;
+}
+
+p{
     margin-top: auto;
     margin-bottom: auto;
 }
+
+header > div:nth-child(1){flex-grow: 1;}
+header > div:nth-child(2){flex-grow: 5;}
