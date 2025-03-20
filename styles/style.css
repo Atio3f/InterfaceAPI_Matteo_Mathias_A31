@@ -39,3 +39,30 @@ main > div > h2 {
 
 }
 
+#musiques-liste{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 30vh);
+}
+.musique{
+    border: 0.2vw solid ;
+    margin: 5px;
+    padding: 5 px;
+    background-color: rgba(0, 0, 0, 0.5);
+    background : url('https://images.genius.com/0c110d90775f639297ff5d0ec254c1c7.300x300x1.jpg') no-repeat center ; 
+    background-size: cover;
+    backdrop-filter: sepia(100%);
+    padding: 20px;
+    margin: 30px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+.musique h3 {
+    backdrop-filter: sepia(100%);
+    padding: 20px;
+    margin: 30px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
