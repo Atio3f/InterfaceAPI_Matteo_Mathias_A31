@@ -1,23 +1,49 @@
 body {
     margin: 0;
+    width: 100%;
+    height: auto;
 }
 
 h2 {
     font-size: 2em;
 }
-
-
-header {
+a{
+    margin: 0;
+    padding: 0;
+}
+.navbar{
     display: flex;
-    flex-direction: row;
-    text-align: center;
-    justify-content: left;
-    background-color: yellow;
+    height: 100px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px black solid ;
+
+}
+.navbar img{
+    width: 30px;
+    height: 30px;
+}
+.navbar input{
+    height: 20px;
+    width: 500px;
 }
 
-header > div {
+.contener{
     display: flex;
+    width: 100%;
 }
+.favoris{
+    width: 15%;
+    border-right: 1px solid black;
+}
+.favoris h1{
+    margin: auto;
+}
+.main{
+    flex: 1;
+}
+
 
 p{
     margin-left: 0.5vw;
