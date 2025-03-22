@@ -78,9 +78,7 @@ function supprimerFavori(title){
         localStorage.setItem("favoris", JSON.stringify(favoris));
         //Update l'affichage
         setupFavoris();
-    } else {
     }
-
     
 }
 

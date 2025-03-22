@@ -39,3 +39,13 @@ async function rechercheDeMusique() {
     
 } 
 rechercheDeMusique();
+
+function bindKeyup() {
+    document.getElementById("utilisateurInput").addEventListener("keyup", function (e) {
+        if (e.key === "Enter" && document.getElementById("utilisateurInput").value != null) { 
+            rechercheDeMusique();
+        }
+    });
+}
+
+bindKeyup();
