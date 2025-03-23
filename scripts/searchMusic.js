@@ -38,9 +38,11 @@ async function rechercheDeMusique() {
 
                 if (!favoris[musique.full_title]) {
                     const newfavori = new Favori(musique.full_title, musique.artist_names, musique.header_image_thumbnail_url, musique.url);
+                    favIcon.src = "img/favorited-icon.png";
                     ajoutFavori(newfavori);
                 } else {
                     if (confirm("Voulez-vous supprimer ce favori ?")) {
+                        favIcon.src = "img/favorite-icon.png";
                         supprimerFavori(musique.full_title);
                     }
                 }
