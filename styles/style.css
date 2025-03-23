@@ -111,7 +111,40 @@ a{
 
 
 
+.clickable{
+    position: relative ;
+    left: 24%;
+    width: 50px;
+   /* cursor: url("../img/delete.png");*/
+}
 
 
+.musiqueBloc{
+    display: flex;
+    border-radius: 10px;
+    margin: 10px 0;
+    background-color: #181818;
+    padding: 10px;
+    cursor: pointer;
+}
+/*cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><text y="20" font-size="20">☆</text></svg>') 16 16, auto;*/
 
+.favoriContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.favoriContainer a,  .favoriContainer h3, .favoriContainer p{
+    margin-top: 0px;
+}
+
+.musiqueBloc{
+    display: flex;
+    border-radius: 10px;
+    margin: 10px 0;
+    background-color: #181818;
+    padding: 10px;
+    cursor: pointer;
+}
 

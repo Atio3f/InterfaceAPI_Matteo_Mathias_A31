@@ -20,11 +20,13 @@ async function rechercheDeMusique() {
             donneesMusique.response.hits.forEach(hit => {
             const musique = hit.result;
             const musiqueHTML = `
-<div class="musiqueBloc" data-musique='${JSON.stringify(musique)}'>                    <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
+                <div class="musiqueBloc" data-musique='${JSON.stringify(musique)}'>                    
+                    <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
                     <div>
-                    <h3>${musique.full_title}</h3>
-                    <p>Artiste : ${musique.artist_names}</p> 
-                       <div>
+                        <h3>${musique.full_title}</h3>
+                        <p>Artiste : ${musique.artist_names}</p> 
+                    </div>
+                    <img class="clickable" src="img/favorite-icon.png" width="100"/>
                 </div>
             `;
 
