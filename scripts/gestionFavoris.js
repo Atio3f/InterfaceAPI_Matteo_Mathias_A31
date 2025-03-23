@@ -69,6 +69,7 @@ function setupFavoris(){
                 if (confirm("Voulez-vous supprimer ce favori ?")) {
                     musiqueDiv.remove();
                     supprimerFavori(title);
+                    rechercheDeMusique();
                 }
             });
 
