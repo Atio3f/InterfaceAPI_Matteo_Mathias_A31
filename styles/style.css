@@ -2,6 +2,10 @@ body {
     margin: 0;
     width: 100%;
     height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #e5dddd ;
+    background-color: #000000;
+
 }
 main{
     height: 100%;
@@ -16,11 +20,11 @@ h1{
 a{
     margin: 0;
     padding: 0;
+    text-decoration: none;
 }
 .navbar{
     display: flex;
-    height: 100px;
-    background-color: white;
+    height: 75px;
     justify-content: center;
     align-items: center;
     border-bottom:1px black solid ;
@@ -42,64 +46,60 @@ a{
 }
 .favoris{
     width: 25%;
-    height: 100%;
-    border-right: 1px solid black;
-}
-.favoris h1{
-    margin: auto;
+    height: fit-content;
+    background-color: #121212;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+
 }
 .main{
     flex: 1;
-}
-.main h1{
-
-}
-
-
-p{
-    margin-left: 0.5vw;
-    margin-top: auto;
-    margin-bottom: auto;
+    background-color: #121212;
+    height: fit-content;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
 }
 
-header > div:nth-child(1){flex-grow: 1;}
-header > div:nth-child(2){flex-grow: 5;}
+.main.fit-content {
+    min-height: fit-content;
+}
 
-main {
+.musiqueBloc{
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    border-radius: 10px;
+    margin: 10px 0;
+    background-color: #181818;
+    padding: 10px;
+    cursor: pointer;
+}
+.musiqueBloc:hover{
+    opacity: 0.8;
+    transform: scale(1.005);
+    transition: 0.2s ease-in-out;
+    background-color: #242424;
+}
+.musiqueBloc > div{
+    padding-left: 5px;
+}
+.descriptionSon > div{
+    display: flex;
 }
 
-main > div > h2 {
-    text-align: center;
-
+.descriptionSon > div > div{
+    width: 50%;
+}
+.descriptionSon img{
+    display: flex;
+    height: 200px;
+    width: 200px;
 }
 
-#musiques-liste{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(3, 30vh);
-}
-.musique{
-    border: 0.2vw solid ;
-    margin: 5px;
-    padding: 5 px;
-    background-color: rgba(0, 0, 0, 0.5);
-    background : url('https://images.genius.com/0c110d90775f639297ff5d0ec254c1c7.300x300x1.jpg') no-repeat center ; 
-    background-size: cover;
-    backdrop-filter: sepia(100%);
-    padding: 20px;
-    margin: 30px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-}
-.musique h3 {
-    backdrop-filter: sepia(100%);
-    padding: 20px;
-    margin: 30px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-}
+
+
+
+
+
+
+
