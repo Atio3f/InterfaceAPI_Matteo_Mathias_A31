@@ -3,55 +3,56 @@ const accessToken = 'hssnQuuDbZj5QUuW4ooRb7ZRX7230tPiKQ-Xj2IBGuKRW0XnU30zEgYexIp
 
 async function rechercheDeMusique() {
     const nomMusique = document.getElementById("utilisateurInput").value;
-    if(nomMusique != ""){
+    if (nomMusique != "") {
         const url = `https://api.genius.com/search?q=${nomMusique}&access_token=${accessToken}`;
 
-        const reponse = await fetch(url, {
-            method: 'GET',
-        });
+        const reponse = await fetch(url, { method: 'GET' });
         const donneesMusique = await reponse.json();
-        const musique = donneesMusique.response.hits[0].result;
-        console.log(donneesMusique);
-        console.log(musique);
-        console.log(musique.full_title);
+        
         let resultatDiv = document.getElementById('main');
         resultatDiv.classList.add("fit-content");
         resultatDiv.innerHTML = "<h1>Meilleurs Résultats :</h1>";
-            donneesMusique.response.hits.forEach(hit => {
+
+        donneesMusique.response.hits.forEach(hit => {
             const musique = hit.result;
-            const musiqueHTML = `
-                <div class="musiqueBloc" data-musique='${JSON.stringify(musique)}'>                    
-                    <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
-                    <div>
-                        <h3>${musique.full_title}</h3>
-                        <p>Artiste : ${musique.artist_names}</p> 
-                    </div>
-                    <img class="clickable" src="img/favorite-icon.png" width="100"/>
+            const musiqueBloc = document.createElement("div");
+            musiqueBloc.classList.add("musiqueBloc");
+            musiqueBloc.dataset.musique = JSON.stringify(musique);
+
+            musiqueBloc.innerHTML = `
+                <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
+                <div>
+                    <h3>${musique.full_title}</h3>
+                    <p>Artiste : ${musique.artist_names}</p> 
                 </div>
+                <img class="${favoris[musique.full_title] ? "clickable"  : "clickable"}" src="img/favorite-icon.png" width="50"/>
             `;
 
-            resultatDiv.innerHTML += musiqueHTML;
-        });
-        document.querySelectorAll(".musiqueBloc").forEach(div => {
-            const musique = JSON.parse(div.getAttribute("data-musique"));
-
-            div.addEventListener("click", function () {
-                console.log("Objet JSON du morceau cliqué :", musique);
+            musiqueBloc.addEventListener("click", function () {
+                afficherDetails(musique);
             });
 
-            document.querySelectorAll(".musiqueBloc").forEach(div => {
-                
-                const musique = JSON.parse(div.getAttribute("data-musique"));
-                div.addEventListener("click", function () {
-                    afficherDetails(musique);
-                });
+            const favIcon = musiqueBloc.querySelector(".clickable");
+            favIcon.addEventListener("click", function (event) {
+                event.stopPropagation();
+
+                if (!favoris[musique.full_title]) {
+                    const newfavori = new Favori(musique.full_title, musique.artist_names, musique.header_image_thumbnail_url, musique.url);
+                    ajoutFavori(newfavori);
+                } else {
+                    if (confirm("Voulez-vous supprimer ce favori ?")) {
+                        supprimerFavori(musique.full_title);
+                    }
+                }
             });
+
+            resultatDiv.appendChild(musiqueBloc);
         });
-    }else{
+    } else {
         console.log("error");
-        
     }
-} 
+}
+
 async function afficherDetails(musique) {
     
     const chansonId = musique.id;

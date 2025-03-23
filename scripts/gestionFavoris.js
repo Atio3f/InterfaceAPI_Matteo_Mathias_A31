@@ -85,12 +85,10 @@ function setupFavoris(){
 
 function ajoutFavori(musique){
     //const newFav.artists, newFav.cover_url, newFav.lyrics_url]= new Favori(musique["full_title"], musique["artist_names"], musique["header_image_thumbnail_url"], musique["url"]);
-    const newFav = new Favori("BLABLACAR", "Tchoupi", "https://images.genius.com/0087672cc369b9e7489f35940125bc9a.300x300x1.jpg", "https://genius.com/Drake-in-my-feelings-lyrics");
+    //const newFav = new Favori("BLABLACAR", "Tchoupi", "https://images.genius.com/0087672cc369b9e7489f35940125bc9a.300x300x1.jpg", "https://genius.com/Drake-in-my-feelings-lyrics");    
+    //favoris[newFav.title] = {"artistes": newFav.artists, "cover_url": newFav.cover_url, "lyrics_url": newFav.lyrics_url};
 
-    console.log(newFav);
-    
-
-    favoris[newFav.title] = {"artistes": newFav.artists, "cover_url": newFav.cover_url, "lyrics_url": newFav.lyrics_url};
+    favoris[musique.title] = {"artistes": musique.artists, "cover_url": musique.cover_url, "lyrics_url": musique.lyrics_url};
     console.log("FAVORIS : " + favoris);
     localStorage.setItem("favoris", JSON.stringify(favoris));
     //Update l'affichage
