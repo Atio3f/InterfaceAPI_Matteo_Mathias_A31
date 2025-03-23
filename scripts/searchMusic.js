@@ -25,7 +25,7 @@ async function rechercheDeMusique() {
                     <h3>${musique.full_title}</h3>
                     <p>Artiste : ${musique.artist_names}</p> 
                 </div>
-                <img class="${favoris[musique.full_title] ? "clickable"  : "clickable"}" src="img/favorite-icon.png" width="50"/>
+                <img class="clickable" src="${favoris[musique.full_title] ?"img/favorited-icon.png" : "img/favorite-icon.png"}" width="50"/>
             `;
 
             musiqueBloc.addEventListener("click", function () {
