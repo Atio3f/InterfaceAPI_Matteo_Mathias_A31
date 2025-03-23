@@ -23,11 +23,15 @@ a{
     text-decoration: none;
 }
 .navbar{
+    display: flex;
+    flex-direction: column;
     background-color: #000000;
     height: 75px;
+    justify-content: center;
+    align-items: center;
 }
 .navbar > div{
-    border-radius: 10px;
+    border-radius: 20px;
     display: flex;
     height: 35px;
     width: 500px;
@@ -38,15 +42,15 @@ a{
 }
 
 .home{
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
 }
 .search{
     width: 25px;
     height: 25px;
+    margin: 0 5px;
 }
 .navbar input{
-    margin: 0 5px;
     height: 20px;
     width: 500px;
 }
@@ -104,8 +108,9 @@ a{
 }
 .descriptionSon img{
     display: flex;
-    height: 200px;
-    width: 200px;
+    height: auto;
+    width: 150px;
+    margin-bottom: 5px;
 }
 
 

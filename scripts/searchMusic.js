@@ -1,5 +1,5 @@
 const accessToken = 'hssnQuuDbZj5QUuW4ooRb7ZRX7230tPiKQ-Xj2IBGuKRW0XnU30zEgYexIpXNk_T'; 
-
+const sauvegarde = document.getElementById("main").innerHTML;
 
 async function rechercheDeMusique() {
     const nomMusique = document.getElementById("utilisateurInput").value;
@@ -20,11 +20,12 @@ async function rechercheDeMusique() {
             donneesMusique.response.hits.forEach(hit => {
             const musique = hit.result;
             const musiqueHTML = `
-<div class="musiqueBloc" data-musique='${JSON.stringify(musique)}'>                    <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
+                <div class="musiqueBloc" data-musique='${JSON.stringify(musique)}'>                    
+                <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
                     <div>
                     <h3>${musique.full_title}</h3>
                     <p>Artiste : ${musique.artist_names}</p> 
-                       <div>
+                       </div>
                 </div>
             `;
 
@@ -108,5 +109,12 @@ function bindKeyup() {
     }
 }
 getParoles("Travis Scott","FEIN");*/
+
+function home(){
+
+    let contenuMainHTML = sauvegarde; 
+    main.innerHTML = contenuMainHTML; 
+}
+
 
 bindKeyup();
