@@ -26,6 +26,7 @@ let favoris = JSON.parse(localStorage.getItem("favoris"));
 
 console.log("FAVORIS : " + favoris);
 if(favoris == null){
+    
     favoris = {};
     ajoutFavori("");
 
@@ -38,19 +39,46 @@ setupFavoris();
 function setupFavoris(){
     
     let resultatDiv = document.getElementById('favoris-liste');
-        resultatDiv.innerHTML = "";
+
+    resultatDiv.innerHTML = "";
+    console.log("ABELE" + Object.keys(favoris).length === 0);
+    if(Object.keys(favoris).length !== 0){
+        
+    
         Object.keys(favoris).forEach(title => {
             console.log(favoris[title]["lyrics_url"]);
-            const musiqueHTML = `
-                <div class="musique">
+            const musiqueDiv = document.createElement("div");
+            musiqueDiv.classList.add("musique", "favorisBloc");
+
+            musiqueDiv.innerHTML = `
+                <div>
                     <img src="${favoris[title]["cover_url"]}" alt="${title}" width="100">
+                    <img class="clickable" src="img/favorited-icon.png" />
+                </div>
+                <div class="favoriContainer">
                     <h3>${title}</h3>
                     <p>Artistes : ${favoris[title]["artistes"]}</p>
                     <a href="${favoris[title]["lyrics_url"]}" target="_blank">Voir sur Genius</a>
                 </div>
             `;
-            resultatDiv.innerHTML += musiqueHTML;
+
+            
+            let clickableIcon = musiqueDiv.querySelector(".clickable");
+            clickableIcon.addEventListener("click", function(event) {
+                event.stopPropagation();    //Empêche que l'affichage de la recherche de la musique s'effectue
+                if (confirm("Voulez-vous supprimer ce favori ?")) {
+                    musiqueDiv.remove();
+                    supprimerFavori(title);
+                }
+            });
+
+        
+            resultatDiv.appendChild(musiqueDiv);  
         });
+    }else{
+        resultatDiv.innerHTML = ( `<p>Aucune recherche favorite</p>`);
+    }
+
     
     console.log(favoris);
 }
