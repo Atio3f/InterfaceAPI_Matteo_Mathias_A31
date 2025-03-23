@@ -1,5 +1,5 @@
 const accessToken = 'hssnQuuDbZj5QUuW4ooRb7ZRX7230tPiKQ-Xj2IBGuKRW0XnU30zEgYexIpXNk_T'; 
-
+const sauvegarde = document.getElementById("main").innerHTML;
 
 async function rechercheDeMusique() {
     const nomMusique = document.getElementById("utilisateurInput").value;
@@ -111,5 +111,12 @@ function bindKeyup() {
     }
 }
 getParoles("Travis Scott","FEIN");*/
+
+function home(){
+
+    let contenuMainHTML = sauvegarde; 
+    main.innerHTML = contenuMainHTML; 
+}
+
 
 bindKeyup();
