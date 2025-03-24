@@ -141,6 +141,18 @@ a{
    align-self: center;
 }
 
+.clickable-details{
+    position: relative ;
+    width: 15px !important;
+    height: 15px;
+    margin-left: 5px;
+   /* cursor: url("../img/delete.png");*/
+   cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><text y="20" font-size="20">⭐</text></svg>') 16 16, auto;
+   align-self: center;
+   margin-top: auto;
+   margin-bottom: auto !important;
+}
+
 .favorisBloc {
     cursor:zoom-in;
 }
