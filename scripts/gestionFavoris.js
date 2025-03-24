@@ -62,7 +62,13 @@ function setupFavoris(){
                 </div>
             `;
 
-            
+            musiqueDiv.addEventListener("click", function() {
+                //On recherche la musique lorsqu'on clique dessus en assignant son titre comme valeur dans la barre de recherche avant
+                document.getElementById("utilisateurInput").value = title;
+
+                rechercheDeMusique();
+            });
+
             let clickableIcon = musiqueDiv.querySelector(".clickable");
             clickableIcon.addEventListener("click", function(event) {
                 event.stopPropagation();    //Empêche que l'affichage de la recherche de la musique s'effectue
