@@ -50,10 +50,25 @@ a{
     height: 25px;
     margin: 0 5px;
 }
-.navbar input{
-    height: 20px;
-    width: 500px;
+.recherche-musique{
+    position: relative; 
 }
+.recherche-musique input{
+    height: 20px;
+    width: 400px;
+}
+.historique{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: #2a2a2a;
+    border: 1px solid #020202;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: none; 
+}
+
 
 .contener{
     display: flex;

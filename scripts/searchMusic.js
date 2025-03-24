@@ -1,5 +1,46 @@
 const accessToken = 'hssnQuuDbZj5QUuW4ooRb7ZRX7230tPiKQ-Xj2IBGuKRW0XnU30zEgYexIpXNk_T'; 
 const sauvegarde = document.getElementById("main").innerHTML;
+let historiquemusique = new Array(5);
+let index = 0;
+
+const utilisateurInput = document.getElementById("utilisateurInput");
+const historiqueDiv = document.getElementById("historique"); 
+
+utilisateurInput.addEventListener("click", function() {
+    historique();
+});
+
+function historique() {
+    historiqueDiv.style.display = "block"; 
+    historiqueDiv.innerHTML = "";  
+    
+    for (let i = 0; i < historiquemusique.length; i++) {
+        if (historiquemusique[i] !== undefined) {
+            
+            let p = document.createElement("p");
+            p.textContent = historiquemusique[i];
+            historiqueDiv.appendChild(p);
+
+            p.addEventListener("click", function() {
+                utilisateurInput.value = historiquemusique[i];
+                rechercheDeMusique(historiquemusique[i]);  
+            });
+        }
+    }
+
+    document.addEventListener("click", function(event) {
+        if (!utilisateurInput.contains(event.target) && !historiqueDiv.contains(event.target)) {
+            historiqueDiv.style.display = "none";  
+        }
+    });
+
+    utilisateurInput.addEventListener("keyup", function(e) {
+        if (e.key === "Enter") {
+            historiqueDiv.style.display = "none";
+        }
+    });
+}
+
 
 async function rechercheDeMusique() {
     const nomMusique = document.getElementById("utilisateurInput").value;
@@ -8,7 +49,7 @@ async function rechercheDeMusique() {
 
         const reponse = await fetch(url, { method: 'GET' });
         const donneesMusique = await reponse.json();
-        
+        ajouterMusique(nomMusique);
         let resultatDiv = document.getElementById('main');
         resultatDiv.classList.add("fit-content");
         resultatDiv.innerHTML = "<h1>Meilleurs Résultats :</h1>";
@@ -18,7 +59,6 @@ async function rechercheDeMusique() {
             const musiqueBloc = document.createElement("div");
             musiqueBloc.classList.add("musiqueBloc");
             musiqueBloc.dataset.musique = JSON.stringify(musique);
-
             musiqueBloc.innerHTML = `
                 <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
                 <div>
@@ -118,6 +158,13 @@ function home(){
 
     let contenuMainHTML = sauvegarde; 
     main.innerHTML = contenuMainHTML; 
+}
+
+function ajouterMusique(nomMusique) {
+    if (!historiquemusique.includes(nomMusique)) {
+        historiquemusique[index] = nomMusique; 
+        index = (index + 1) % historiquemusique.length;
+    }
 }
 
 
