@@ -8,25 +8,8 @@ const historiqueDiv = document.getElementById("historique");
 
 utilisateurInput.addEventListener("click", function() {
     historique();
+    autoCompletion();
 });
-
-function historique() {
-    historiqueDiv.style.display = "block"; 
-    historiqueDiv.innerHTML = "";  
-    
-    for (let i = 0; i < historiquemusique.length; i++) {
-        if (historiquemusique[i] !== undefined) {
-            
-            let p = document.createElement("p");
-            p.textContent = historiquemusique[i];
-            historiqueDiv.appendChild(p);
-
-            p.addEventListener("click", function() {
-                utilisateurInput.value = historiquemusique[i];
-                rechercheDeMusique(historiquemusique[i]);  
-            });
-        }
-    }
 
     document.addEventListener("click", function(event) {
         if (!utilisateurInput.contains(event.target) && !historiqueDiv.contains(event.target)) {
@@ -39,7 +22,7 @@ function historique() {
             historiqueDiv.style.display = "none";
         }
     });
-}
+
 
 
 async function rechercheDeMusique() {
@@ -137,27 +120,15 @@ function bindKeyup() {
     document.getElementById("utilisateurInput").addEventListener("keyup", function (e) {
         if (e.key === "Enter" && document.getElementById("utilisateurInput").value != null) { 
             rechercheDeMusique();
+            utilisateurInput.blur();
         }
     });
 }
 
-/*async function getParoles(titre, artiste) {
-    const url = `https://api.lyrics.ovh/v1/${artiste}/${titre}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
-    if (data.lyrics) {
-        return data.lyrics;
-    } else {
-        return "Paroles non disponibles.";
-    }
-}
-getParoles("Travis Scott","FEIN");*/
-
 function home(){
-
     let contenuMainHTML = sauvegarde; 
     main.innerHTML = contenuMainHTML; 
+    utilisateurInput.value = ""; 
 }
 
 function ajouterMusique(nomMusique) {
@@ -167,5 +138,70 @@ function ajouterMusique(nomMusique) {
     }
 }
 
+function autoCompletion() {
+    
+    utilisateurInput.addEventListener("input", function () {
+        let valeurChaine = utilisateurInput.value.toLowerCase();
+
+        let suggestions = historiquemusique.filter(musique => 
+            musique.toLowerCase().startsWith(valeurChaine)
+        );
+
+        historiqueDiv.innerHTML = "";
+
+        
+        suggestions.forEach(suggestion => {
+            let p = document.createElement("p");
+            p.textContent = suggestion;
+            p.style.cursor = "pointer"; 
+            historiqueDiv.appendChild(p);
+        
+            p.addEventListener("click", function() {
+                utilisateurInput.value = suggestion;  
+                historiqueDiv.style.display = "none";  
+                rechercheDeMusique(suggestion);  
+            });
+        });
+
+    });
+    utilisateurInput.addEventListener("keydown", function (e) {
+        if (e.key === "Tab") { 
+            e.preventDefault(); 
+            const suggestions = Array.from(historiqueDiv.querySelectorAll("p"));
+            if (suggestions.length > 0) {
+                const matchingSuggestions = suggestions.filter(suggestion => 
+                    suggestion.textContent.toLowerCase().startsWith(utilisateurInput.value.toLowerCase())
+                );
+                if (matchingSuggestions.length > 0) {
+                    utilisateurInput.value = matchingSuggestions[0].textContent;
+                    historiqueDiv.style.display = "none";
+                    rechercheDeMusique(utilisateurInput.value);
+                    utilisateurInput.blur();
+                }
+            }
+        }
+    });
+    
+}
+
+function historique() {
+    historiqueDiv.style.display = "block"; 
+    historiqueDiv.innerHTML = "";  
+    
+    for (let i = 0; i < historiquemusique.length; i++) {
+        if (historiquemusique[i] !== undefined) {
+            
+            let p = document.createElement("p");
+            p.textContent = historiquemusique[i];
+            historiqueDiv.appendChild(p);
+
+            p.addEventListener("click", function() {
+                utilisateurInput.value = historiquemusique[i];
+                historiqueDiv.style.display = "none"; 
+                rechercheDeMusique(historiquemusique[i]);  
+            });
+        }
+    }
+}
 
 bindKeyup();
