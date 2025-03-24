@@ -40,11 +40,12 @@ a:hover{
     border-radius: 20px;
     display: flex;
     height: 35px;
-    width: 500px;
+    width: 34vw;
     padding: 5px;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     background-color: #2a2a2a;
+    gap: 0.2vw;
 }
 
 .home{
@@ -59,6 +60,7 @@ a:hover{
 .recherche-musique{
     position: relative; 
 }
+
 .recherche-musique input{
     height: 20px;
     width: 400px;

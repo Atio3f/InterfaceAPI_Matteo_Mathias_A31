@@ -33,7 +33,7 @@ async function rechercheDeMusique() {
         //GIF d'attente
         resultatDiv.innerHTML = 
         `<div id="bloc-gif-attente"> 
-            <img src="../img/attente-ajax.gif" alt="GIF Attente de résultats" width="50"/>
+            <img src="./img/attente-ajax.gif" alt="GIF Attente de résultats" width="50"/>
         </div>`;
         const reponse = await fetch(url, { method: 'GET' });
         const donneesMusique = await reponse.json();
