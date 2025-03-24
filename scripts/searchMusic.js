@@ -26,53 +26,67 @@ utilisateurInput.addEventListener("click", function() {
 
 
 async function rechercheDeMusique() {
+    let resultatDiv = document.getElementById('main');
     const nomMusique = document.getElementById("utilisateurInput").value;
     if (nomMusique != "") {
         const url = `https://api.genius.com/search?q=${nomMusique}&access_token=${accessToken}`;
-
+        //GIF d'attente
+        resultatDiv.innerHTML = 
+        `<div id="bloc-gif-attente"> 
+            <img src="../img/attente-ajax.gif" alt="GIF Attente de résultats" width="50"/>
+        </div>`;
         const reponse = await fetch(url, { method: 'GET' });
         const donneesMusique = await reponse.json();
         ajouterMusique(nomMusique);
-        let resultatDiv = document.getElementById('main');
+        
         resultatDiv.classList.add("fit-content");
         resultatDiv.innerHTML = "<h1>Meilleurs Résultats :</h1>";
+        if(donneesMusique.response.hits.length != 0){
+            donneesMusique.response.hits.forEach(hit => {
+                const musique = hit.result;
+                console.log(musique);
+                const musiqueBloc = document.createElement("div");
+                musiqueBloc.classList.add("musiqueBloc");
+                musiqueBloc.dataset.musique = JSON.stringify(musique);
+                let shortTitle = musique.full_title.replace(/\s+/g, " ");
+                shortTitle = shortTitle.substring(0, shortTitle.lastIndexOf(" by "));
+                musiqueBloc.innerHTML = `
+                    <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
+                    <div>
+                        <h3>${musique.full_title}</h3>
+                        <p>Artiste : ${musique.artist_names}</p> 
+                    </div>
+                    <img class="clickable" src="${favoris[musique.full_title] ?"img/favorited-icon.png" : "img/favorite-icon.png"}" width="50"/>
+                `;
 
-        donneesMusique.response.hits.forEach(hit => {
-            const musique = hit.result;
-            const musiqueBloc = document.createElement("div");
-            musiqueBloc.classList.add("musiqueBloc");
-            musiqueBloc.dataset.musique = JSON.stringify(musique);
-            musiqueBloc.innerHTML = `
-                <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
-                <div>
-                    <h3>${musique.full_title}</h3>
-                    <p>Artiste : ${musique.artist_names}</p> 
-                </div>
-                <img class="clickable" src="${favoris[musique.full_title] ?"img/favorited-icon.png" : "img/favorite-icon.png"}" width="50"/>
-            `;
+                musiqueBloc.addEventListener("click", function () {
+                    afficherDetails(musique);
+                });
 
-            musiqueBloc.addEventListener("click", function () {
-                afficherDetails(musique);
-            });
+                const favIcon = musiqueBloc.querySelector(".clickable");
+                favIcon.addEventListener("click", function (event) {
+                    event.stopPropagation();
 
-            const favIcon = musiqueBloc.querySelector(".clickable");
-            favIcon.addEventListener("click", function (event) {
-                event.stopPropagation();
-
-                if (!favoris[musique.full_title]) {
-                    const newfavori = new Favori(musique.full_title, musique.artist_names, musique.header_image_thumbnail_url, musique.url);
-                    favIcon.src = "img/favorited-icon.png";
-                    ajoutFavori(newfavori);
-                } else {
-                    if (confirm("Voulez-vous supprimer ce favori ?")) {
-                        favIcon.src = "img/favorite-icon.png";
-                        supprimerFavori(musique.full_title);
+                    if (!favoris[musique.full_title]) {
+                        const newfavori = new Favori(musique.full_title, musique.artist_names, musique.header_image_thumbnail_url, musique.url);
+                        favIcon.src = "img/favorited-icon.png";
+                        ajoutFavori(newfavori);
+                    } else {
+                        if (confirm("Voulez-vous supprimer ce favori ?")) {
+                            favIcon.src = "img/favorite-icon.png";
+                            supprimerFavori(musique.full_title);
+                        }
                     }
-                }
-            });
+                });
 
-            resultatDiv.appendChild(musiqueBloc);
-        });
+                resultatDiv.appendChild(musiqueBloc);
+            });
+        }else{
+            resultatDiv.innerHTML = 
+            `<div id="bloc-gif-attente"> 
+                <p> Aucun résultat trouvé.</p>
+            </div>`;
+        }
     } else {
         console.log("error");
     }

@@ -11,7 +11,6 @@ class Favori {
         this.lyrics_url = lyrics_url;
         const shortTitle = full_title.replace(/\s+/g, " ");
         this.shortTitle = shortTitle.substring(0, shortTitle.lastIndexOf(" by "));
-        console.log(this.shortTitle);
     }
 
     get_title(){

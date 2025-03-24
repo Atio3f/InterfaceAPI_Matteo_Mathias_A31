@@ -28,24 +28,31 @@ function setupFavoris(){
             musiqueDiv.classList.add("musique", "favorisBloc");
 
             musiqueDiv.innerHTML = `
-                <div>
+                
                     <img src="${favoris[title]["cover_url"]}" alt="${title}" width="100">
-                    <img class="clickable" src="img/favorited-icon.png" />
-                </div>
+                
                 <div class="favoriContainer">
                     <h3>${favoris[title]["shortTitle"]}</h3>
                     <p>Artistes : ${favoris[title]["artistes"]}</p>
-                    <a href="${favoris[title]["lyrics_url"]}" target="_blank">Voir sur Genius</a>
+                    
                 </div>
+                <div class="favoriContainer favLink">
+                    <img class="clickable" src="img/favorited-icon.png" />
+                    <a href="${favoris[title]["lyrics_url"]}" target="_blank">Voir sur Genius</a>
+
+                </div>
+
             `;
+
 
             musiqueDiv.addEventListener("click", function() {
                 //On recherche la musique lorsqu'on clique dessus en assignant son titre comme valeur dans la barre de recherche avant
-                document.getElementById("utilisateurInput").value = title;
+                document.getElementById("utilisateurInput").value = favoris[title]["shortTitle"];
 
                 rechercheDeMusique();
             });
 
+            //Fonction ajoutée 
             let clickableIcon = musiqueDiv.querySelector(".clickable");
             clickableIcon.addEventListener("click", function(event) {
                 event.stopPropagation();    //Empêche que l'affichage de la recherche de la musique s'effectue
