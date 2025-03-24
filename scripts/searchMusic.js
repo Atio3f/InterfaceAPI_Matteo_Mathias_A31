@@ -92,26 +92,52 @@ async function afficherDetails(musique) {
     let detailDiv = document.getElementById('main');
     detailDiv.innerHTML = `
         <div class="descriptionSon">
-        <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="200">
-        <h1>${musique.full_title}</h1>
-        <div>
-        <div>
-        <p><strong>🎤Artiste:</strong> ${musique.artist_names}</p>
-        <p><strong>👀Vues:</strong> ${musique.stats.pageviews}</p>
-        </div>
-        <div>
-        <p><strong>📅Date de sortie:</strong> ${musique.release_date_for_display}</p>
-        <p><strong>📝Annotations:</strong> ${musique.stats.unreviewed_annotations} annotations non révisées</p>
-        </div>
-        </div>
-        <a href="${parolesPage}" target="_blank">Voir les paroles complètes</a>
-        <h2>En savoir plus sur ${musique.primary_artist_names}</h2>
-        
-        <img src="${musique.primary_artist.header_image_url}" alt="Image de l'artiste" width="150">
- 
-        <a href="https://genius.com/artists/${musique.primary_artist.id}" target="_blank">Page de l'artiste</a>
+            <div>
+                <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="200"> 
+            </div>
+            <div>
+                <h1>${musique.full_title}</h1> 
+                <img class="clickable-details" src="${favoris[musique.full_title] ?"img/favorited-icon.png" : "img/favorite-icon.png"}"/>
+
+            </div>
+            <div>
+                <div>
+                    <p><strong>🎤Artiste:</strong> ${musique.artist_names}</p>
+                    <p><strong>👀Vues:</strong> ${musique.stats.pageviews}</p>
+                </div>
+                <div>
+                    <p><strong>📅Date de sortie:</strong> ${musique.release_date_for_display}</p>
+                    <p><strong>📝Annotations:</strong> ${musique.stats.unreviewed_annotations} annotations non révisées</p>
+                </div>
+                
+            </div>
+            <div>
+                <a href="${parolesPage}" target="_blank">Voir les paroles complètes</a>
+
+            </div>
+            <h2>En savoir plus sur ${musique.primary_artist_names}</h2>
+            
+            <img src="${musique.primary_artist.header_image_url}" alt="Image de l'artiste" width="150">
+    
+            <a href="https://genius.com/artists/${musique.primary_artist.id}" target="_blank">Page de l'artiste</a>
         </div>
     `;
+
+    const favIcon = detailDiv.querySelector(".clickable-details");
+            favIcon.addEventListener("click", function (event) {
+                event.stopPropagation();
+
+                if (!favoris[musique.full_title]) {
+                    const newfavori = new Favori(musique.full_title, musique.artist_names, musique.header_image_thumbnail_url, musique.url);
+                    favIcon.src = "img/favorited-icon.png";
+                    ajoutFavori(newfavori);
+                } else {
+                    if (confirm("Voulez-vous supprimer ce favori ?")) {
+                        favIcon.src = "img/favorite-icon.png";
+                        supprimerFavori(musique.full_title);
+                    }
+                }
+            });
 }
 
 
