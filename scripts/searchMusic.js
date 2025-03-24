@@ -45,7 +45,7 @@ async function rechercheDeMusique() {
             musiqueBloc.innerHTML = `
                 <img src="${musique.song_art_image_url}" alt="${musique.full_title}" width="100">
                 <div>
-                    <h3>${musique.full_title}</h3>
+                    <h3>${musique.title_with_featured}</h3>
                     <p>Artiste : ${musique.artist_names}</p> 
                 </div>
                 <img class="clickable" src="${favoris[musique.full_title] ?"img/favorited-icon.png" : "img/favorite-icon.png"}" width="50"/>
@@ -119,7 +119,7 @@ async function afficherDetails(musique) {
             
             <img src="${musique.primary_artist.header_image_url}" alt="Image de l'artiste" width="150">
     
-            <a href="https://genius.com/artists/${musique.primary_artist.id}" target="_blank">Page de l'artiste</a>
+            <a href="${musique.primary_artist.url}}" target="_blank">Page de l'artiste</a>
         </div>
     `;
 
