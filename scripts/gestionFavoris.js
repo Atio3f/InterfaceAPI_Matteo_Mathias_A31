@@ -5,7 +5,6 @@ console.log("FAVORIS : " + favoris);
 if(favoris == null){
     
     favoris = {};
-    ajoutFavori("");
 
     localStorage.setItem("favoris", JSON.stringify(favoris));
     console.log("LISTE FAVORIS VIDE");
